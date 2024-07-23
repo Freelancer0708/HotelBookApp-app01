@@ -2,6 +2,7 @@
 <code>npm install next@latest react@latest react-dom@latest
 npm install --save-dev typescript @types/react @types/node
 npm install firebase
+npm install dayjs
 </code>
 
 <h3>.env.local</h3>
