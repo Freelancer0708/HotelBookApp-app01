@@ -35,24 +35,28 @@ const AdminPlans = () => {
     }, []);
 
     return (
-        <div>
+        <div className='admin-plans'>
             <h1>プラン一覧</h1>
-            <ul>
+            <ul className='plans'>
                 {plans.map(plan => {
                     const reservedRooms = reservations[plan.id] || 0;
                     const remainingRooms = plan.roomCount - reservedRooms;
                     return (
-                        <li key={plan.id} style={{ marginBottom: '20px' }}>
-                            <h2>{plan.planName}</h2>
-                            {plan.imageUrl && <img src={plan.imageUrl} alt={plan.planName} style={{ width: 'auto', height: 'auto', maxHeight: '200px' }} />}
-                            <p>ホテル名: {plan.hotelName}</p>
-                            <p>予約日数: {plan.days}</p>
-                            <p>予約初日: {plan.startDate}</p>
-                            <p>値段: {plan.price}</p>
-                            <p>登録部屋数: {plan.roomCount}</p>
-                            <p>予約されている部屋数: {reservedRooms}</p>
-                            <p>残りの部屋数: {remainingRooms}</p>
-                            <a href={`/admin/plans/${plan.id}`}>詳細を見る</a>
+                        <li key={plan.id}>
+                            <a href={`/admin/plans/${plan.id}`}>
+                                <h2>{plan.planName}</h2>
+                                <div className='plans-row'>
+                                    {plan.imageUrl && <img src={plan.imageUrl} alt={plan.planName} style={{ width: 'auto', height: 'auto', maxHeight: '200px' }} />}
+                                    <div className='plans-text'>
+                                        <p>ホテル名: {plan.hotelName}</p>
+                                        <p>期間: {plan.days}日間</p>
+                                        <p>初日: {plan.startDate}</p>
+                                        <p>料金: {plan.price}円</p>
+                                        <p>空き: {remainingRooms}部屋</p>
+                                        <small>※{plan.roomCount}部屋中 {reservedRooms}部屋予約済</small>
+                                    </div>
+                                </div>
+                            </a>
                         </li>
                     );
                 })}

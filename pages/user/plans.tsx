@@ -42,21 +42,26 @@ const Plans = () => {
     };
 
     return (
-        <div>
+        <div className='user-plans'>
             <h1>プラン一覧</h1>
-            <ul>
+            <ul className='plans'>
                 {plans.map(plan => {
                     const reservedRooms = reservations[plan.id] || 0;
                     const remainingRooms = plan.roomCount - reservedRooms;
                     return (
                         <li key={plan.id} style={{ marginBottom: '20px' }}>
-                            {plan.imageUrl && <img src={plan.imageUrl} alt={plan.planName} style={{ width: 'auto', height: 'auto', maxHeight: '200px' }} />}
-                            <h2>{plan.planName}</h2>
-                            <p>ホテル名: {plan.hotelName}</p>
-                            <p>宿泊期間: {formatStayPeriod(plan.startDate, plan.days)}</p>
-                            <p>値段: {plan.price}</p>
-                            <p>残りの部屋数: {remainingRooms}</p>
-                            <a href={`/user/plans/${plan.id}`}>詳細を見る</a>
+                            <a href={`/user/plans/${plan.id}`}>
+                                <h2>{plan.planName}</h2>
+                                <div className='plans-row'>
+                                    {plan.imageUrl && <img src={plan.imageUrl} alt={plan.planName} style={{ width: 'auto', height: 'auto', maxHeight: '200px' }} />}
+                                    <div className='plans-text'>
+                                        <p>{plan.hotelName}</p>
+                                        <p>{formatStayPeriod(plan.startDate, plan.days)}</p>
+                                        <p>料金: {plan.price}円</p>
+                                        <p>空き: {remainingRooms}部屋</p>
+                                    </div>
+                                </div>
+                            </a>
                         </li>
                     );
                 })}
