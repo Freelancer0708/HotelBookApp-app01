@@ -41,6 +41,16 @@ const Reservations = () => {
         fetchReservations();
     }, [user]);
 
+    const formatTimestamp = (timestamp) => {
+        const date = timestamp.toDate();
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+        return `${year}年${month}月${day}日 ${hours}時${minutes}分`;
+    };
+
     const formatStayPeriod = (startDate: string, days: number) => {
         const start = dayjs(startDate);
         const end = start.add(days - 1, 'day');
@@ -48,22 +58,29 @@ const Reservations = () => {
     };
 
     return (
-        <div>
+        <div className='user-reservations'>
             <h1>予約履歴</h1>
             {reservations.length === 0 ? (
                 <p>予約履歴がありません。</p>
             ) : (
-                <ul>
+                <ul className='plans'>
                     {reservations.map(reservation => (
                         <li key={reservation.id}>
                             {plans[reservation.planId] ? (
                                 <>
-                                    <h2>プラン名: {plans[reservation.planId]?.planName}</h2>
-                                    {plans[reservation.planId]?.imageUrl && <img src={plans[reservation.planId]?.imageUrl} alt={plans[reservation.planId]?.planName} style={{ width: 'auto', height: 'auto', maxHeight: '200px' }} />}
-                                    <p>ホテル名: {plans[reservation.planId]?.hotelName}</p>
-                                    <p>宿泊期間: {formatStayPeriod(plans[reservation.planId]?.startDate, plans[reservation.planId]?.days)}</p>
-                                    <p>値段: {plans[reservation.planId]?.price}</p>
-                                    <p>部屋数: {reservation.roomCount}</p>
+                                    <a>
+                                        <h2>プラン名: {plans[reservation.planId]?.planName}</h2>
+                                        <div className='plans-row'>
+                                        {plans[reservation.planId]?.imageUrl && <img src={plans[reservation.planId]?.imageUrl} alt={plans[reservation.planId]?.planName} style={{ width: 'auto', height: 'auto', maxHeight: '200px' }} />}
+                                            <div className='plans-text'>
+                                                <p>{plans[reservation.planId]?.hotelName}</p>
+                                                <p>{formatStayPeriod(plans[reservation.planId]?.startDate, plans[reservation.planId]?.days)}</p>
+                                                <p>料金: {plans[reservation.planId]?.price}円</p>
+                                                <p>部屋数: {reservation.roomCount}部屋</p>
+                                                <p>登録日: {formatTimestamp(reservation.createdAt)}</p>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </>
                             ) : (
                                 <p>プランID: {reservation.planId}</p>

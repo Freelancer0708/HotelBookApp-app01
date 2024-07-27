@@ -76,12 +76,12 @@ const EditPlan = () => {
     const remainingRooms = plan.roomCount - reservedRooms;
 
     return (
-        <div>
-            <h1>プランを編集</h1>
-            <form onSubmit={handleSubmit}>
+        <div className='admin-detail'>
+            <h2>プランを編集</h2>
+            <form onSubmit={handleSubmit} className='detail-item'>
                 <div>
                     <label>
-                        プラン名:
+                        <p>プラン名:</p>
                         <input
                             type="text"
                             name="planName"
@@ -93,7 +93,7 @@ const EditPlan = () => {
                 </div>
                 <div>
                     <label>
-                        ホテル名:
+                        <p>ホテル名:</p>
                         <input
                             type="text"
                             name="hotelName"
@@ -105,7 +105,7 @@ const EditPlan = () => {
                 </div>
                 <div>
                     <label>
-                        予約日数:
+                        <p>予約日数:</p>
                         <input
                             type="number"
                             name="days"
@@ -117,7 +117,7 @@ const EditPlan = () => {
                 </div>
                 <div>
                     <label>
-                        予約初日:
+                        <p>予約初日:</p>
                         <input
                             type="date"
                             name="startDate"
@@ -129,7 +129,7 @@ const EditPlan = () => {
                 </div>
                 <div>
                     <label>
-                        値段:
+                        <p>値段:</p>
                         <input
                             type="number"
                             name="price"
@@ -141,7 +141,7 @@ const EditPlan = () => {
                 </div>
                 <div>
                     <label>
-                        登録部屋数:
+                        <p>登録部屋数:</p>
                         <input
                             type="number"
                             name="roomCount"
@@ -153,7 +153,7 @@ const EditPlan = () => {
                 </div>
                 <div>
                     <label>
-                        写真:
+                        <p>写真:</p>
                         <input
                             type="file"
                             onChange={(e) => setImage(e.target.files ? e.target.files[0] : null)}

@@ -13,6 +13,7 @@ const ReservePlan = () => {
     const [availableRooms, setAvailableRooms] = useState<number | null>(null);
     const [plan, setPlan] = useState<any>(null);
     const [totalPrice, setTotalPrice] = useState<number>(0);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchPlan = async () => {
@@ -49,8 +50,14 @@ const ReservePlan = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setErrorMessage(null); // エラーメッセージをリセット
+
         if (availableRooms !== null && roomCount > availableRooms) {
-            alert('申し訳ありませんが、部屋数が不足しています。');
+            setErrorMessage('部屋数を減らしてください。');
+            return;
+        }
+        if (roomCount <= 0) {
+            setErrorMessage('1部屋以上にしてください。');
             return;
         }
 
@@ -67,16 +74,19 @@ const ReservePlan = () => {
             router.push(`/user/plans/${id}/complete`);
         } catch (error) {
             console.error('Error adding reservation: ', error);
+            setErrorMessage('予約の追加中にエラーが発生しました。');
         }
     };
 
     return (
-        <div>
-            <h1>予約入力画面</h1>
-            <form onSubmit={handleSubmit}>
+        <div className='user-reserve'>
+            <h2>予約入力画面</h2>
+            <form onSubmit={handleSubmit} className='detail-item'>
+                <div><span>現在空いている部屋数: </span>{availableRooms}部屋</div>
                 <div>
+                    <span>予約する部屋数: </span>
+                    <span>
                     <label>
-                        部屋数:
                         <input
                             type="number"
                             value={roomCount}
@@ -84,8 +94,11 @@ const ReservePlan = () => {
                             required
                         />
                     </label>
+                    部屋
+                    </span>
                 </div>
-                <p>総額: {totalPrice} 円</p>
+                {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
+                <div><span>総額: </span>{totalPrice}円</div>
                 <button type="submit">予約する</button>
             </form>
         </div>
