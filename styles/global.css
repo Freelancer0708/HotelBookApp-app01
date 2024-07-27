@@ -316,10 +316,8 @@ h2 {
 .plans li {
     width: 100%;
     max-width: 500px;
-    margin: 0 auto;
     box-sizing: border-box;
 }
-
 .plans li a {
     display: flex;
     flex-direction: column;
@@ -331,7 +329,6 @@ h2 {
     box-sizing: border-box;
     border-radius: 10px;
 }
-
 .plans-row {
     display: flex;
     justify-content: flex-start;
@@ -356,7 +353,6 @@ h2 {
 .plans-text p {
     font-size: 16px;
 }
-
 .user-plans .plans li a {
     background-color: #c6e2ff;
 }
@@ -365,6 +361,105 @@ h2 {
 }
 .user-plans .plans-row {
     gap: 15px;
+}
+.user-reservations .plans li a {
+    background-color: #c6c6ff;
+}
+.user-reservations .plans li {
+    max-width: 530px;
+}
+.user-reservations .plans-row {
+    gap: 15px;
+}
+
+/* user/plans/[id] */
+/* user/plans/[id]/reserve */
+.user-detail,
+.user-reserve {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: #c6e2ff;
+    box-sizing: border-box;
+    padding: 20px;
+    border-radius: 10px;
+}
+.detail-row {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.detail-row img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+}
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 5px;
+}
+.detail-item a,
+.detail-item button {
+    background-color: cadetblue;
+    padding: 8px 10px;
+    border-radius: 10px;
+    color: #fff;
+    line-height: 1;
+    margin-top: 10px;
+    border: none;
+    outline: none;
+}
+
+.user-reserve .detail-item div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.user-reserve .detail-item input {
+    width: 50px;
+    padding: 2px 6px;
+    border: none;
+    outline: none;
+}
+.user-reserve .detail-item p {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+/* pages\user\plans\[id]\complete */
+.user-complete {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+.user-complete p {
+    text-align: center;
+}
+
+/* user/admin/[id] */
+.admin-detail {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: #ffe5cc;
+    box-sizing: border-box;
+    padding: 20px;
+    border-radius: 10px;
 }
 
 @media screen and (max-width: 767px) {
@@ -447,6 +542,7 @@ h2 {
 
     .plans li {
         max-width: 300px;
+        margin: 0 auto;
     }
     .plans li a {
         align-items: center;
@@ -466,7 +562,8 @@ h2 {
     .user-plans .plans-row {
         gap: 15px;
     }
-    .user-plans .plans-text  {
+    .user-plans .plans-text  ,
+    .user-reservations .plans-text  {
         width: 100%;
     }
     .user-plans .plans-text p {
